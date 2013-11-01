@@ -1,5 +1,6 @@
 {
   "name": "classie",
+  "author": "Yaw Joseph Etse <yaw.etse@gmail.com> (https://github.com/yawetse)",
   "description": "dom class helper functions, browserified, classie -from bonzo",
   "version": "0.0.1",
   "main": "index.js",
@@ -14,15 +15,14 @@
     "chai": "1.5.0",
     "grunt": "0.4.1",
     "grunt-contrib-jshint": "0.4.3",
-    "grunt-contrib-copy": "0.4.1",
     "grunt-simple-mocha": "0.4.0",
     "grunt-jsbeautifier": "0.1.7",
     "mocha": "1.9.0"
   },
   "keywords": [
-    "Amex Pub",
-    "amexpub",
-    "package",
-    "library"
+    "Dom",
+    "browserify",
+    "class",
+    "dom manipulation"
   ]
 }

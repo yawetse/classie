@@ -52,30 +52,12 @@ module.exports = function(grunt) {
         'routes/**/*.js',
         'test/**/*.js'
       ]
-    },
-    copy: {
-      main: {
-        files: [
-          // includes files within path
-          // {expand: true, src: ['path/*'], dest: 'dest/', filter: 'isFile'},
-
-          // includes files within path and its sub-directories
-          {expand: true, src: ['assets/**'], dest: '../module/assets/'},
-
-          // makes all src relative to cwd
-          // {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
-
-          // flattens results to a single level
-          // {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'}
-        ]
-      }
     }
   });
 
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-copy');
 
 
   grunt.registerTask('default', ['jshint', 'simplemocha']);
