@@ -1,4 +1,3 @@
-classie
-=======
+# classie
 
-classie - class helper functions  * from bonzo https://github.com/ded/bonzo adding commonjs module
+dom class helper functions, browserified, classie -from bonzo
