@@ -52,12 +52,29 @@ module.exports = function(grunt) {
         'routes/**/*.js',
         'test/**/*.js'
       ]
+    },
+    watch: {
+      scripts: {
+        // files: '**/*.js',
+        files: [
+          'Gruntfile.js',
+          'config/**/*.js',
+          'index.js',
+          'lib/**/*.js',
+          'test/**/*.js',
+        ],
+        tasks: ['lint', 'test'],
+        options: {
+          interrupt: true
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   grunt.registerTask('default', ['jshint', 'simplemocha']);
