@@ -1,10 +1,11 @@
 {
   "name": "classie",
-  "main": "classie.js",
-  "version": "1.0.1",
-  "homepage": "https://github.com/desandro/classie",
+  "main": "classie.min.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/yawetse/classie",
   "authors": [
-    "David DeSandro"
+    "Yaw Este",
+    "Ernie Casilla"
   ],
   "description": "class helper",
   "moduleType": [

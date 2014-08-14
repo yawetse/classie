@@ -1,8 +1,8 @@
 {
   "name": "classie",
-  "repo": "desandro/classie",
+  "repo": "yawetse/classie",
   "description": "class helper",
-  "version": "1.0.1",
-  "scripts": ["classie.js"],
-  "main": "classie.js"
+  "version": "0.1.1",
+  "scripts": ["classie.min.js"],
+  "main": "classie.min.js"
 }
