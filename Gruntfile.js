@@ -1,83 +1,110 @@
-/*
- * classie
- * http://github.amexpub.com/modules/classie
- *
- * Copyright (c) 2013 Amex Pub. All rights reserved.
- */
-
 'use strict';
 
 module.exports = function(grunt) {
-  grunt.initConfig({
-    jsbeautifier: {
-      files: ["<%= jshint.all %>"],
-      options: {
-        "indent_size": 2,
-        "indent_char": " ",
-        "indent_level": 0,
-        "indent_with_tabs": false,
-        "preserve_newlines": true,
-        "max_preserve_newlines": 10,
-        "brace_style": "collapse",
-        "keep_array_indentation": false,
-        "keep_function_indentation": false,
-        "space_before_conditional": true,
-        "eval_code": false,
-        "indent_case": false,
-        "unescape_strings": false,
-        "space_after_anon_function": true
-      }
-    },
-    simplemocha: {
-      options: {
-        globals: ['should'],
-        timeout: 3000,
-        ignoreLeaks: false,
-        ui: 'bdd',
-        reporter: 'tap'
-      },
-      all: {
-        src: 'test/**/*.js'
-      }
-    },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      all: [
-        'Gruntfile.js',
-        'config/**/*.js',
-        'index.js',
-        'lib/**/*.js',
-        'routes/**/*.js',
-        'test/**/*.js'
-      ]
-    },
-    watch: {
-      scripts: {
-        // files: '**/*.js',
-        files: [
-          'Gruntfile.js',
-          'config/**/*.js',
-          'index.js',
-          'lib/**/*.js',
-          'test/**/*.js',
-        ],
-        tasks: ['lint', 'test'],
-        options: {
-          interrupt: true
+
+    //Project configuration.
+    grunt.initConfig({
+
+        jshint: {
+            files: ['test/unit/**/*.js', 'test/intergration/**/*.js', 'lib/**/*.js', '!node_modules/*', '!test/helpers/**/*.js'],
+            options: {
+                jshintrc: '.jshintrc',
+                reporter: require('jshint-stylish')
+            }
+        },
+
+        jsbeautifier: {
+            files: ['lib/**/*.js', 'test/unit/**/*.js', 'Gruntfile.js'],
+            options: {
+                config: '.jsbeautify'
+            }
+        },
+
+        uglify: {
+            options: {
+                sourceMap: true,
+                compress: {
+                    drop_console: true
+                }
+            },
+            prod: {
+                files: {
+                    'classie.min.js': ['lib/**/*.js']
+                }
+            }
+        },
+
+        browserify: {
+            options: {
+                debug: true
+            },
+            test: {
+                files: {
+                    'test/browserified.js': ['test/unit/**/*.js']
+                }
+            }
+        },
+
+        coverage: {
+            options: {
+                thresholds: {
+                    'statements': 90,
+                    'branches': 90,
+                    'lines': 90,
+                    'functions': 90
+                },
+                dir: 'coverage',
+                root: 'test'
+            }
+        },
+
+        plato: {
+            lint: {
+                options: {
+                    jshint: grunt.file.readJSON('.jshintrc'),
+                    dir: "test/coverage",
+                    title: grunt.file.readJSON('package.json').name,
+                    complexity: {
+                        minmi: true,
+                        forin: true,
+                        logicalot: false
+                    }
+                },
+                files: {
+                    'test/coverage': ['lib/**/*.js']
+                }
+            },
+        },
+        watch: {
+            options: {
+                livereload: true,
+            },
+            jshint: {
+                tasks: ['jshint'],
+                files: ['test/unit/**/*.js', 'test/intergration/**/*.js', 'lib/**/*.js', '!node_modules/*', '!test/helpers/**/*.js']
+            },
+            uglify: {
+                tasks: ['uglify'],
+                files: ['lib/*.js']
+            },
+            jsbeautifier: {
+                tasks: ['jsbeautifier'],
+                files: ['test/unit/**/*.js', 'test/intergration/**/*.js', 'lib/**/*.js', '!node_modules/*', '!test/helpers/**/*.js']
+            }
         }
-      }
+
+    });
+
+    //automatically load deps from package.jso
+    for (var key in grunt.file.readJSON("package.json").devDependencies) {
+        if (key.indexOf("grunt") === 0 && key !== "grunt") {
+            grunt.loadNpmTasks(key);
+        }
     }
-  });
 
-  grunt.loadNpmTasks('grunt-simple-mocha');
-  grunt.loadNpmTasks('grunt-jsbeautifier');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+    require('time-grunt')(grunt);
 
-
-  grunt.registerTask('default', ['jshint', 'simplemocha']);
-  grunt.registerTask('lint', 'jshint');
-  grunt.registerTask('test', 'simplemocha');
+    grunt.registerTask('cover', ['plato']);
+    grunt.registerTask('test', ['browserify:test']);
+    grunt.registerTask('default', ['watch']);
 };
