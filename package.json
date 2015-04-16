@@ -2,7 +2,7 @@
   "name": "classie",
   "author": "Yaw Joseph Etse <yaw.etse@gmail.com> (https://github.com/yawetse)",
   "description": "dom class helper functions, browserified, classie -from bonzo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
@@ -42,6 +42,15 @@
     "dom manipulation"
   ],
   "contributors": [
+    {
+      "name": "Ernie Casilla",
+      "email": "ecasilla@icloud.com",
+      "url": "https://github.com/ecasilla",
+      "contributions": 6,
+      "additions": 17017,
+      "deletions": 16719,
+      "hireable": true
+    },
     {
       "name": "Yaw Etse",
       "email": "yaw.etse@gmail.com",
