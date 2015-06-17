@@ -2,7 +2,7 @@
   "name": "classie",
   "author": "Yaw Joseph Etse <yaw.etse@gmail.com> (https://github.com/yawetse)",
   "description": "dom class helper functions, browserified, classie -from bonzo",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
